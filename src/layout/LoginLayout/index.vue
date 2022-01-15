@@ -69,6 +69,7 @@ import { useMessage, NIcon } from 'naive-ui'
 import { AnimalCat16Regular } from '@vicons/fluent'
 import { MdHand as HandIcon } from '@vicons/ionicons4'
 import { useLoginStore } from '../../store'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'login-layout',
@@ -77,6 +78,8 @@ export default defineComponent({
     HandIcon
   },
   setup() {
+    const router = useRouter()
+
     const { accountLoginAction } = useLoginStore()
 
     const formValue = ref({ username: '', password: '' })
@@ -102,6 +105,7 @@ export default defineComponent({
           icon: () => h(NIcon, null, { default: () => h(AnimalCat16Regular) })
         })
         accountLoginAction(formValue.value)
+        router.push('/excessive')
       } else {
         message.error('你的账号或者密码错啦QAQ！', {
           icon: () => h(NIcon, null, { default: () => h(AnimalCat16Regular) })

@@ -8,7 +8,8 @@ import {
   NFormItem,
   NMessageProvider,
   NPopconfirm,
-  NIcon
+  NIcon,
+  NCard
 } from 'naive-ui'
 
 const native = create({
@@ -21,7 +22,8 @@ const native = create({
     NFormItem,
     NMessageProvider,
     NPopconfirm,
-    NIcon
+    NIcon,
+    NCard
   ]
 })
 

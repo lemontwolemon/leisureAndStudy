@@ -35,7 +35,6 @@ export const useLoginStore = defineStore('login', {
     accountLoginAction(userInfo: ILoginInfoType) {
       this.userInfo = userInfo
       storage.set('userInfo', userInfo)
-      console.log(this.userInfo, '123')
     },
     loadLocal() {
       const userInfo = storage.get('userInfo')
