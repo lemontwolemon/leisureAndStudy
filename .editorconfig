@@ -1,6 +1,4 @@
 # http://editorconfig.org
-# 跨系统, 跨编辑器的编码规范
-# Webstorm默认读取该文件, vscode需要安装插件 'EditorConfig for VS Code'
 
 root = true
 

@@ -5,7 +5,19 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
-    component: () => import('../components/HelloWorld.vue')
+    redirect: 'login',
+    component: () => import('../App.vue'),
+    children: [
+      {
+        path: 'login',
+        component: () => import('../layout/LoginLayout/index.vue')
+      }
+    ]
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'not - found',
+    component: () => import('../views/not-found/not-found.vue')
   }
 ]
 
