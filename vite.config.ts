@@ -20,7 +20,8 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src')
+      find: '@',
+      replacement: path.resolve(__dirname, 'src')
     }
   },
   css: {
