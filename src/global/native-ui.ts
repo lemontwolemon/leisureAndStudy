@@ -9,7 +9,11 @@ import {
   NMessageProvider,
   NPopconfirm,
   NIcon,
-  NCard
+  NCard,
+  NAvatar,
+  NTabs,
+  NTabPane,
+  NBackTop
 } from 'naive-ui'
 
 const native = create({
@@ -23,7 +27,11 @@ const native = create({
     NMessageProvider,
     NPopconfirm,
     NIcon,
-    NCard
+    NCard,
+    NAvatar,
+    NTabs,
+    NTabPane,
+    NBackTop
   ]
 })
 

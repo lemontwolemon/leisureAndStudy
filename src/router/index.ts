@@ -32,6 +32,10 @@ const routes = [
       {
         path: 'study',
         component: () => import('../views/study/index.vue')
+      },
+      {
+        path: 'classify',
+        component: () => import('../views/photo/components/classifyPhoto.vue')
       }
     ]
   },
