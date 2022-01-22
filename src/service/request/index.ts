@@ -1,15 +1,12 @@
 import axios from 'axios'
 import type { AxiosInstance } from 'axios'
 import { QURequsetInterceptors, QURequestConfig } from './types'
-import { NSpin } from 'naive-ui'
-import { SpinProps } from 'naive-ui'
 
 const DEAFULT_LOADING = true
 
 class QURequest {
   instance: AxiosInstance
   interceptors?: QURequsetInterceptors
-  loading?: SpinProps
   showLoading: boolean
 
   constructor(config: QURequestConfig) {
@@ -28,13 +25,6 @@ class QURequest {
     // 添加所有实例都有的拦截器
     this.instance.interceptors.request.use(
       (config) => {
-        if (this.showLoading) {
-          this.loading = NSpin.service({
-            show: true,
-            description: '正在加载...',
-            stroke: 'rgba(0,0,0,0.5)'
-          })
-        }
         return config
       },
       (err) => {
@@ -43,23 +33,10 @@ class QURequest {
     )
     this.instance.interceptors.response.use(
       (res) => {
-        // 将loading移除
-        if (this.loading) {
-          this.loading.show = false
-        }
         const data = res.data
-        if (data.returnCode === '-1001') {
-          console.log('请求失败~错误信息')
-        } else {
-          return data
-        }
+        return data
       },
       (err) => {
-        // 将loading移除
-        if (this.loading) {
-          this.loading.show = false
-        }
-
         if (err.response.status === 404) {
           console.log('404错误')
         }

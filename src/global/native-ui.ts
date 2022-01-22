@@ -13,7 +13,9 @@ import {
   NAvatar,
   NTabs,
   NTabPane,
-  NBackTop
+  NBackTop,
+  NMenu,
+  NCarousel
 } from 'naive-ui'
 
 const native = create({
@@ -31,7 +33,9 @@ const native = create({
     NAvatar,
     NTabs,
     NTabPane,
-    NBackTop
+    NBackTop,
+    NMenu,
+    NCarousel
   ]
 })
 

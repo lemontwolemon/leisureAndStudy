@@ -23,7 +23,14 @@ const routes = [
       },
       {
         path: 'music',
-        component: () => import('../views/music/index.vue')
+        redirect: '/music/home',
+        component: () => import('../views/music/index.vue'),
+        children: [
+          {
+            path: 'home',
+            component: () => import('../views/music/components/Home/index.vue')
+          }
+        ]
       },
       {
         path: 'photo',
