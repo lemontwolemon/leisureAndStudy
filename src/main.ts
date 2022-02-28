@@ -12,6 +12,7 @@ import { createPinia } from 'pinia'
 import { setupStore } from './store'
 import { setupTopMenu } from './store/homePageMenu'
 import { setupSubMenu } from './store/homeSubMenu'
+import 'default-passive-events'
 
 const app = createApp(App)
 

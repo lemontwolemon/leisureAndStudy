@@ -14,6 +14,7 @@
                 name="username"
                 v-model="formValue.username"
                 required=""
+                autocomplete="off"
               />
               <label>用户名</label>
             </n-form-item>
@@ -23,6 +24,7 @@
                 name="password"
                 required=""
                 v-model="formValue.password"
+                autocomplete="off"
               />
               <label>密码</label>
             </n-form-item>
@@ -63,13 +65,13 @@
 </template>
 
 <script>
-import { defineComponent, ref, h } from 'vue'
 import gastly from '../../components/gastly/gastly.vue'
 import { useMessage, NIcon } from 'naive-ui'
 import { AnimalCat16Regular } from '@vicons/fluent'
 import { MdHand as HandIcon } from '@vicons/ionicons4'
 import { useLoginStore } from '../../store'
-import { useRouter } from 'vue-router'
+import { phoneLogin } from '../../service/login'
+import router from '../../router'
 
 export default defineComponent({
   name: 'login-layout',
@@ -78,8 +80,6 @@ export default defineComponent({
     HandIcon
   },
   setup() {
-    const router = useRouter()
-
     const { accountLoginAction } = useLoginStore()
 
     const formValue = ref({ username: '', password: '' })
@@ -97,18 +97,16 @@ export default defineComponent({
         message.warning('密码不能为空QAQ！', {
           icon: () => h(NIcon, null, { default: () => h(AnimalCat16Regular) })
         })
-      } else if (
-        formValue.value.username === onlyUser.value.username &&
-        formValue.value.password === onlyUser.value.password
-      ) {
-        message.success('登录成功啦QWQ！', {
-          icon: () => h(NIcon, null, { default: () => h(AnimalCat16Regular) })
-        })
-        accountLoginAction(formValue.value)
-        router.push('/excessive')
       } else {
-        message.error('你的账号或者密码错啦QAQ！', {
-          icon: () => h(NIcon, null, { default: () => h(AnimalCat16Regular) })
+        const postData = {
+          phone: formValue.value.username,
+          password: formValue.value.password
+        }
+        phoneLogin(postData).then((res) => {
+          if (res.code !== 200) return message.error(res.message)
+          accountLoginAction(postData, res)
+          // router.push('/excessive')
+          message.success('登陆成功')
         })
       }
     }

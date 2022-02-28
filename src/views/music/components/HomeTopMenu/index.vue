@@ -2,7 +2,7 @@
   <div class="home-top-menu">
     <div class="logo">
       <img class="logo-img" src="src/assets/img/logo.png" alt="" />
-      <span class="logo-name">三秋音乐馆</span>
+      <span class="logo-name">网抑云音乐</span>
     </div>
     <n-menu
       class="menu"

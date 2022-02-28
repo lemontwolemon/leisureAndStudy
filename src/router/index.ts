@@ -60,7 +60,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to) => {
-  const userInfo = storage.get('userInfo')
+  const userInfo = storage.get('info')
   if (to.path !== '/login') {
     if (!userInfo) {
       return '/login'

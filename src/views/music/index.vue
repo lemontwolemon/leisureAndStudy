@@ -1,5 +1,6 @@
 <template>
   <div class="music">
+    <n-back-top listen-to=".music" :right="100" />
     <div class="home-menu">
       <home-top-menu @activeKey="getActiveKey" />
       <home-sub-menu v-show="activeKey === 1" />
@@ -27,6 +28,7 @@ const getActiveKey = (key: any) => {
 <style scoped>
 .music {
   height: 100vh;
+  overflow-x: hidden;
 }
 .home-menu {
   background-color: #f6f6f6;

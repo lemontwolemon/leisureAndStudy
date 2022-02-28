@@ -8,7 +8,8 @@ module.exports = {
     'eslint:recommended',
     '@vue/typescript/recommended',
     'prettier',
-    'plugin:prettier/recommended'
+    'plugin:prettier/recommended',
+    'vue-global-api'
   ],
   parserOptions: {
     ecmaVersion: 2020
@@ -19,6 +20,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     'vue/multi-word-component-names': 'off',
-    'no-undef': 'off'
+    'no-undef': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off'
   }
 }

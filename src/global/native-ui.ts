@@ -1,6 +1,5 @@
 import {
   create,
-  NButton,
   NConfigProvider,
   NSpin,
   NInput,
@@ -15,12 +14,14 @@ import {
   NTabPane,
   NBackTop,
   NMenu,
-  NCarousel
+  NCarousel,
+  NImage,
+  NGrid,
+  NGi
 } from 'naive-ui'
 
 const native = create({
   components: [
-    NButton,
     NConfigProvider,
     NSpin,
     NInput,
@@ -35,7 +36,10 @@ const native = create({
     NTabPane,
     NBackTop,
     NMenu,
-    NCarousel
+    NCarousel,
+    NImage,
+    NGrid,
+    NGi
   ]
 })
 
