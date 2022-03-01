@@ -71,7 +71,6 @@ import { AnimalCat16Regular } from '@vicons/fluent'
 import { MdHand as HandIcon } from '@vicons/ionicons4'
 import { useLoginStore } from '../../store'
 import { phoneLogin } from '../../service/login'
-import router from '../../router'
 
 export default defineComponent({
   name: 'login-layout',
@@ -84,9 +83,9 @@ export default defineComponent({
 
     const formValue = ref({ username: '', password: '' })
 
-    const message = useMessage()
-
     const onlyUser = ref({ username: 'sanqiu', password: '123456' })
+
+    const message = useMessage()
 
     const handleSubmit = () => {
       if (formValue.value.username === '') {
@@ -105,7 +104,6 @@ export default defineComponent({
         phoneLogin(postData).then((res) => {
           if (res.code !== 200) return message.error(res.message)
           accountLoginAction(postData, res)
-          // router.push('/excessive')
           message.success('登陆成功')
         })
       }

@@ -92,9 +92,9 @@ const newStartData = {
               // href: 'https://baike.baidu.com/item/%E4%B8%94%E5%90%AC%E9%A3%8E%E5%90%9F',
               target: '_self'
             },
-            { default: () => '最新' }
+            { default: () => '全部' }
           ),
-        key: 1
+        key: 0
       },
       {
         label: () =>
@@ -104,21 +104,9 @@ const newStartData = {
               // href: 'https://baike.baidu.com/item/%E4%B8%94%E5%90%AC%E9%A3%8E%E5%90%9F',
               target: '_self'
             },
-            { default: () => '内地' }
+            { default: () => '华语' }
           ),
-        key: 2
-      },
-      {
-        label: () =>
-          h(
-            'a',
-            {
-              // href: 'https://baike.baidu.com/item/%E4%B8%94%E5%90%AC%E9%A3%8E%E5%90%9F',
-              target: '_self'
-            },
-            { default: () => '港台' }
-          ),
-        key: 3
+        key: 7
       },
       {
         label: () =>
@@ -130,19 +118,7 @@ const newStartData = {
             },
             { default: () => '欧美' }
           ),
-        key: 4
-      },
-      {
-        label: () =>
-          h(
-            'a',
-            {
-              // href: 'https://baike.baidu.com/item/%E4%B8%94%E5%90%AC%E9%A3%8E%E5%90%9F',
-              target: '_self'
-            },
-            { default: () => '韩国' }
-          ),
-        key: 5
+        key: 96
       },
       {
         label: () =>
@@ -154,7 +130,19 @@ const newStartData = {
             },
             { default: () => '日本' }
           ),
-        key: 6
+        key: 8
+      },
+      {
+        label: () =>
+          h(
+            'a',
+            {
+              // href: 'https://baike.baidu.com/item/%E4%B8%94%E5%90%AC%E9%A3%8E%E5%90%9F',
+              target: '_self'
+            },
+            { default: () => '韩国' }
+          ),
+        key: 16
       }
     ]
   }

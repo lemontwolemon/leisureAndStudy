@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import { registerApp } from './global'
+// import { registerApp } from './global'
 import './assets/css/global.css'
 import './assets/css/index.less'
 // 通用字体
@@ -16,7 +16,7 @@ import 'default-passive-events'
 
 const app = createApp(App)
 
-app.use(router).use(registerApp).use(createPinia()).mount('#app')
+app.use(router).use(createPinia()).mount('#app')
 
 setupStore()
 setupTopMenu()

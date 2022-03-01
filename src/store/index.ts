@@ -1,8 +1,7 @@
 import { defineStore } from 'pinia'
 import { storage } from '../utils/localStorage/localStorage'
 import { ILoginInfoType, IPhoneLogin } from './types'
-import router from '@/router'
-
+import router from '../router'
 export const useLoginStore = defineStore('login', {
   //state
   state: () => {

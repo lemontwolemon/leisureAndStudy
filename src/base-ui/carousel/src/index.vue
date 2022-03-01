@@ -9,19 +9,21 @@
         :value="props.menuData.activeKey"
         mode="horizontal"
         :options="props.menuData.menuOptions"
+        :default-value="props.menuData.menuOptions[0].key"
+        @update:value="update"
       />
     </div>
-    <div class="carousel-content">
+    <div class="carousel-content" v-if="isShow">
       <n-carousel :space-between="20" :loop="true" show-arrow draggable>
         <template #arrow="{ prev, next }">
           <div class="custom-arrow">
             <button type="button" class="curtom-arrow--left" @click="prev">
-              <n-icon size="40">
+              <n-icon size="80">
                 <ChevronBackCircleOutline class="icon-left" />
               </n-icon>
             </button>
             <button type="button" class="curtom-arrow--right" @click="next">
-              <n-icon size="40"
+              <n-icon size="80"
                 ><ChevronForwardCircleOutline class="icon-right"
               /></n-icon>
             </button>
@@ -37,14 +39,18 @@
             ></li>
           </ul>
         </template>
-        <div v-for="(item, index) in data" :key="index">
+        <div
+          style="padding-bottom: 50px; width: 60%; margin: 0 auto"
+          v-for="(item, index) in data"
+          :key="index"
+        >
           <n-grid x-gap="12" :cols="5">
             <n-gi v-for="subItem in item" :key="subItem.id">
               <div>
                 <div class="allImage">
                   <img class="image" :src="subItem.picUrl" />
                   <n-icon
-                    size="40"
+                    size="60"
                     style="
                       position: absolute;
                       left: 50%;
@@ -87,7 +93,6 @@ import {
   ChevronForwardCircleOutline,
   PlayCircleOutline
 } from '@vicons/ionicons5'
-import { computed, onMounted, ref } from 'vue'
 
 const props = defineProps({
   title: {
@@ -100,6 +105,21 @@ const props = defineProps({
     type: Array
   }
 })
+
+const isShow = ref<boolean>(true)
+
+const refresh = () => {
+  isShow.value = false
+  nextTick(() => {
+    isShow.value = true
+  })
+}
+
+const instance = getCurrentInstance()
+
+const update = (key: number) => {
+  instance?.parent?.exposeProxy?.getTopSong(key)
+}
 
 const againGroup = (data: any, num: number) => {
   let result = []
@@ -123,19 +143,27 @@ const format = computed(() => {
 })
 
 const data = ref<any>('')
+
 setTimeout(() => {
   data.value = againGroup(props.data, 5)
 }, 200)
+
+watch(
+  () => props.data,
+  () => {
+    data.value = againGroup(props.data, 5)
+    refresh()
+  }
+)
 </script>
 
 <style scoped>
 .carousel {
-  width: 60%;
-  margin: 0 auto;
+  padding: 50px 0 0 0;
 }
 
 .carousel-header {
-  padding: 50px 0 24px 0;
+  padding: 0 0 24px 0;
   display: flex;
   justify-content: center;
 }
@@ -149,11 +177,26 @@ setTimeout(() => {
   position: absolute;
   width: 50px;
   height: 200px;
-  left: 0;
+  left: -40px;
   top: 0;
+  transition: left 1s;
   background-color: rgba(236, 236, 236, 0);
   border: 0;
   cursor: pointer;
+}
+
+.carousel:hover .curtom-arrow--right {
+  width: 50px;
+}
+
+.carousel:hover .curtom-arrow--left {
+  left: 10px;
+}
+.carousel:hover .icon-left {
+  color: greenyellow;
+}
+.carousel:hover .icon-right {
+  color: greenyellow;
 }
 
 .icon-left {
@@ -161,16 +204,13 @@ setTimeout(() => {
   transition: color 1s;
 }
 
-.curtom-arrow--left:hover .icon-left {
-  color: greenyellow;
-}
-
 .curtom-arrow--right {
   position: absolute;
-  width: 50px;
+  width: 0;
   height: 200px;
-  right: 20px;
+  right: 40px;
   top: 0;
+  transition: width 1s;
   background-color: rgba(236, 236, 236, 0);
   border: 0;
   cursor: pointer;
@@ -179,10 +219,6 @@ setTimeout(() => {
 .icon-right {
   color: rgba(226, 226, 226, 0);
   transition: color 1s;
-}
-
-.curtom-arrow--right:hover .icon-right {
-  color: greenyellow;
 }
 
 .allImage {
@@ -207,8 +243,9 @@ setTimeout(() => {
   margin: 0;
   padding: 0;
   position: absolute;
-  bottom: 0;
-  left: 580px;
+  bottom: 30px;
+  transform: translateX(-50%);
+  left: 50%;
 }
 
 .custom-dots li {
@@ -232,7 +269,7 @@ setTimeout(() => {
   height: 200px;
   transition: all 0.6s;
 }
-.image:hover {
+.allImage:hover .image {
   transform: scale(1.2);
 }
 </style>

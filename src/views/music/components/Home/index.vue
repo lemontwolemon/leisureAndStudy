@@ -1,14 +1,21 @@
 <template>
   <div class="home">
     <div class="recommend-resource">
-      <qjg-carousel title="每日推荐" :data="recommendResourceList" />
+      <qjg-carousel title="每日歌单推荐" :data="recommendResourceList" />
     </div>
-    <!--    <div class="playlist-recommended">-->
-    <!--      <qjg-carousel v-bind="playlistRecommendData" />-->
-    <!--    </div>-->
-    <!--    <div class="new-start">-->
-    <!--      <qjg-carousel v-bind="newStartData" />-->
-    <!--    </div>-->
+    <div class="playlist-recommended">
+      <qjg-carousel title="每日歌曲推荐" :data="recommendSongsList" />
+    </div>
+    <div class="new-start">
+      <qjg-carousel
+        :title="newStartData.title"
+        :menu-data="newStartData.menuData"
+        :data="topSongList"
+      />
+    </div>
+    <div class="qjg-list">
+      <qjg-list />
+    </div>
     <!--    <div class="new-album">-->
     <!--      <qjg-carousel v-bind="newAlbumData" />-->
     <!--    </div>-->
@@ -21,11 +28,20 @@
 <script setup lang="ts">
 import QjgCarousel from '../../../../base-ui/carousel'
 import { useCarousel } from './hooks'
-import { recommendResource } from '../../../../service/music'
+import {
+  recommendResource,
+  recommendSongs,
+  topSong
+} from '../../../../service/music'
+import QjgList from './components/QjgList.vue'
 const { playlistRecommendData, newStartData, newAlbumData, MVData } =
   useCarousel
 
 const recommendResourceList = ref<any>()
+
+const recommendSongsList = ref<any>()
+
+const topSongList = ref<any>()
 
 const getRecommendResource = () => {
   recommendResource().then((res: any) => {
@@ -33,8 +49,37 @@ const getRecommendResource = () => {
   })
 }
 
+const getRecommendSongsList = () => {
+  recommendSongs().then((res: any) => {
+    recommendSongsList.value = res.data.dailySongs.map((a: any) => {
+      a.picUrl = a.al.picUrl
+      a.playcount = a.id
+      return a
+    })
+  })
+}
+
+const getTopSong = (key: any) => {
+  const postData = {
+    type: key
+  }
+  topSong(postData).then((res: any) => {
+    topSongList.value = res.data.map((a: any) => {
+      a.picUrl = a.album.blurPicUrl
+      a.playcount = a.id
+      return a
+    })
+  })
+}
+
+defineExpose({
+  getTopSong
+})
+
 onMounted(() => {
   getRecommendResource()
+  getRecommendSongsList()
+  getTopSong(0)
 })
 </script>
 
@@ -44,6 +89,9 @@ onMounted(() => {
 }
 .new-start {
   background-color: #fff;
+}
+.qjg-list {
+  background-color: #f5f5f5;
 }
 .new-album {
   background-color: #f5f5f5;
