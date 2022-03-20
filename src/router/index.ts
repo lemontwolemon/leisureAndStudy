@@ -1,8 +1,6 @@
-//从VueRouter中导入需要的函数模块
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { storage } from '../utils/localStorage/localStorage'
 
-//导入各个组件
 const routes = [
   {
     path: '/',
@@ -28,7 +26,73 @@ const routes = [
         children: [
           {
             path: 'home',
+            name: 'home',
             component: () => import('../views/music/components/Home/index.vue')
+          },
+          {
+            path: 'mymusic',
+            name: 'mymusic',
+            redirect: '/music/mymusic/like',
+            component: () =>
+              import('../views/music/components/MyMusic/index.vue'),
+            children: [
+              {
+                path: 'like',
+                redirect: '/music/mymusic/like/song',
+                component: () =>
+                  import('../views/music/components/MyMusic/Like/index.vue'),
+                children: [
+                  {
+                    path: 'song',
+                    component: () =>
+                      import(
+                        '../views/music/components/MyMusic/Like/Song/index.vue'
+                      )
+                  },
+                  {
+                    path: 'playlist',
+                    component: () =>
+                      import(
+                        '../views/music/components/MyMusic/Like/PlayList/index.vue'
+                      )
+                  },
+                  {
+                    path: 'album',
+                    component: () =>
+                      import(
+                        '../views/music/components/MyMusic/Like/Album/index.vue'
+                      )
+                  },
+                  {
+                    path: 'mv',
+                    component: () =>
+                      import(
+                        '../views/music/components/MyMusic/Like/Mv/index.vue'
+                      )
+                  }
+                ]
+              },
+              {
+                path: 'create',
+                component: () =>
+                  import('../views/music/components/MyMusic/Create/index.vue')
+              },
+              {
+                path: 'focus',
+                component: () =>
+                  import('../views/music/components/MyMusic/Focus/index.vue')
+              },
+              {
+                path: 'fans',
+                component: () =>
+                  import('../views/music/components/MyMusic/Fans/index.vue')
+              },
+              {
+                path: 'uploadmv',
+                component: () =>
+                  import('../views/music/components/MyMusic/UploadMv/index.vue')
+              }
+            ]
           }
         ]
       },
@@ -53,7 +117,6 @@ const routes = [
   }
 ]
 
-//创建router实例并传递routes配置
 const router = createRouter({
   history: createWebHashHistory(),
   routes
@@ -68,5 +131,4 @@ router.beforeEach((to) => {
   }
 })
 
-// 导出router
 export default router

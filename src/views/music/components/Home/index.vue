@@ -1,4 +1,7 @@
 <template>
+  <div class="home-top">
+    <home-sub-menu />
+  </div>
   <div class="home">
     <div class="recommend-resource">
       <qjg-carousel title="每日歌单推荐" :data="recommendResourceList" />
@@ -15,6 +18,9 @@
     </div>
     <div class="qjg-list">
       <qjg-list />
+    </div>
+    <div class="qjg-player">
+      <qjg-player />
     </div>
     <!--    <div class="new-album">-->
     <!--      <qjg-carousel v-bind="newAlbumData" />-->
@@ -33,7 +39,6 @@ import {
   recommendSongs,
   topSong
 } from '../../../../service/music'
-import QjgList from './components/QjgList.vue'
 const { playlistRecommendData, newStartData, newAlbumData, MVData } =
   useCarousel
 
@@ -83,23 +88,36 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
-.playlist-recommended {
-  background-color: #fafafa;
-}
-.new-start {
-  background-color: #fff;
-}
-.qjg-list {
+<style lang="less" scoped>
+.home-top {
   background-color: #f5f5f5;
 }
-.new-album {
-  background-color: #f5f5f5;
-}
-.mv {
-  background-color: #fdfdfd;
-}
-.recommend-resource {
-  background-color: #fff;
+.home {
+  position: relative;
+  padding-bottom: 100px;
+  .playlist-recommended {
+    background-color: #fafafa;
+  }
+  .new-start {
+    background-color: #fff;
+  }
+  .qjg-list {
+    background-color: #f5f5f5;
+  }
+  .qjg-player {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #ffffff;
+  }
+  .new-album {
+    background-color: #f5f5f5;
+  }
+  .mv {
+    background-color: #fdfdfd;
+  }
+  .recommend-resource {
+    background-color: #fff;
+  }
 }
 </style>

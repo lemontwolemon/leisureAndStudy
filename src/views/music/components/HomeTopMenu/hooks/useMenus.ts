@@ -1,39 +1,38 @@
 import { storeToRefs } from 'pinia'
 import { useMenuStore } from '../../../../../store/homePageMenu'
-import { h } from 'vue'
+import type { MenuOption } from 'naive-ui'
 
 const { activeKey } = storeToRefs(useMenuStore())
-const store = useMenuStore()
 
 const inputData = {
   placeholder: '搜索音乐、MV、歌单、用户'
 }
 
-const menuOptions = [
+const menuOptions: MenuOption[] = [
   {
     label: () =>
       h(
         'a',
         {
-          // href: 'https://baike.baidu.com/item/%E4%B8%94%E5%90%AC%E9%A3%8E%E5%90%9F',
-          target: '_self'
+          target: '_blank'
         },
         { default: () => '音乐馆' }
       ),
-    key: 1
+    key: 1,
+    path: '/music/home'
   },
   {
     label: () =>
       h(
         'a',
         {
-          // href: 'https://baike.baidu.com/item/%E4%B8%94%E5%90%AC%E9%A3%8E%E5%90%9F',
-          target: '_self'
+          target: '_blank'
         },
         { default: () => '我的音乐' }
       ),
-    key: 2
+    key: 2,
+    path: '/music/mymusic'
   }
 ]
 
-export { activeKey, inputData, menuOptions, store }
+export { activeKey, inputData, menuOptions }

@@ -9,7 +9,7 @@ export const useMenuStore = defineStore('menu', {
   },
   getters: {
     changeKey(state) {
-      return (key) => {
+      return (key: any) => {
         state.activeKey = key
       }
     }

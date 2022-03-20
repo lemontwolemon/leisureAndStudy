@@ -1,6 +1,5 @@
 import { storeToRefs } from 'pinia'
 import { useSubMenuStore } from '../../../../../store/homeSubMenu'
-import { h } from 'vue'
 
 const { activeKey } = storeToRefs(useSubMenuStore())
 

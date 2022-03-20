@@ -27,10 +27,7 @@
             >
               {{ item.name }}
             </div>
-            <template
-              v-for="(subItem, index) in songListData[index]"
-              :key="index"
-            >
+            <template v-for="(subItem, index) in item.children" :key="index">
               <div
                 v-if="index < 3"
                 style="
@@ -39,6 +36,7 @@
                   color: white;
                   margin-top: 30px;
                 "
+                @click="play(subItem)"
               >
                 <div style="margin-right: 10px">{{ index + 1 }}</div>
                 <div
@@ -69,6 +67,7 @@
 <script setup lang="ts">
 import { hotPlayList, playListDetail } from '../../../../../service/music'
 import { useMessage } from 'naive-ui'
+import emitter from '../../../../../components/eventBus'
 
 const message = useMessage()
 
@@ -77,8 +76,6 @@ const getBackgroundImage = (index: any) => {
 }
 
 const hotPlayListData = ref<any>()
-
-const songListData = ref<any[]>([])
 
 const getHotPlayList = () => {
   hotPlayList().then((res: any) => {
@@ -89,11 +86,18 @@ const getHotPlayList = () => {
       const postData = {
         id: item.id
       }
+      item['children'] = []
       playListDetail(postData).then((res: any) => {
-        songListData.value.push(res.playlist.tracks)
+        for (const song of res.playlist.tracks) {
+          item.children.push(song)
+        }
       })
     }
   })
+}
+
+const play = (info: any) => {
+  emitter.emit('info', info)
 }
 
 onMounted(() => {

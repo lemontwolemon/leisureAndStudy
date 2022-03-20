@@ -1,13 +1,9 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import { resolve } from 'path'
 import Components from 'unplugin-vue-components/vite'
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 import AutoImport from 'unplugin-auto-import/vite'
-
-function pathResolve(dir: any) {
-  return resolve(__dirname, '.', dir)
-}
+import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -100,9 +96,12 @@ export default defineConfig({
     include: ['axios']
   },
   resolve: {
-    alias: {
-      '@': pathResolve('src')
-    }
+    alias: [
+      {
+        find: '@',
+        replacement: path.resolve(__dirname, 'src')
+      }
+    ]
   },
   css: {
     // css预处理器

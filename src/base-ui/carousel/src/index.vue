@@ -14,7 +14,7 @@
       />
     </div>
     <div class="carousel-content" v-if="isShow">
-      <n-carousel :space-between="20" :loop="true" show-arrow draggable>
+      <n-carousel :space-between="20" :loop="true" show-arrow>
         <template #arrow="{ prev, next }">
           <div class="custom-arrow">
             <button type="button" class="curtom-arrow--left" @click="prev">
@@ -51,6 +51,7 @@
                   <img class="image" :src="subItem.picUrl" />
                   <n-icon
                     size="60"
+                    @click="playSong(subItem)"
                     style="
                       position: absolute;
                       left: 50%;
@@ -93,6 +94,7 @@ import {
   ChevronForwardCircleOutline,
   PlayCircleOutline
 } from '@vicons/ionicons5'
+import emitter from '../../../components/eventBus'
 
 const props = defineProps({
   title: {
@@ -141,6 +143,10 @@ const format = computed(() => {
     }
   }
 })
+
+const playSong = (info: any) => {
+  emitter.emit('info', info)
+}
 
 const data = ref<any>('')
 

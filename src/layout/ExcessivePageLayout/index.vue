@@ -76,7 +76,9 @@ export default defineComponent({
 
     const enter = (path: string) => {
       if (path) {
-        router.push(path)
+        router.push({
+          path: path
+        })
       } else {
         message.error('还没想好做什么呢，看看其他的吧QAQ', {
           icon: () => h(NIcon, null, { default: () => h(AnimalCat16Regular) })

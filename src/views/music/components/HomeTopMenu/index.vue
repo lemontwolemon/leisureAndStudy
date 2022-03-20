@@ -12,22 +12,33 @@
       :options="menuOptions"
     />
     <qjg-input v-bind="inputData" />
-    <a class="login">登录</a>
+    <!--    <a class="login">登录</a>-->
+    <div class="user-info">
+      <n-dropdown trigger="hover" :options="options" @select="handleSelect">
+        <n-avatar round size="large" :src="info.profile.avatarUrl" />
+      </n-dropdown>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import QjgInput from '@/components/QjgInput/QjgInput.vue'
-import { useMenus } from './hooks'
+import { useMenus, userInfo } from './hooks'
+import { useMenuStore } from '../../../../store/homePageMenu'
 
-const emit = defineEmits(['activeKey'])
+const store = useMenuStore()
 
-const { activeKey, inputData, menuOptions, store } = useMenus
+const router = useRouter()
 
-const handleUpdateValue = (key: any) => {
+const { activeKey, inputData, menuOptions } = useMenus
+
+const handleUpdateValue = (key: any, menuOption: any) => {
   store.changeActiveKey(key)
-  emit('activeKey', activeKey.value)
+  router.push({
+    path: menuOption.path
+  })
 }
+const { info, options, handleSelect } = userInfo
 </script>
 
 <style scoped>
@@ -67,5 +78,12 @@ const handleUpdateValue = (key: any) => {
 .login:hover {
   color: #319a7c;
   text-decoration: underline;
+}
+.user-info {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 </style>

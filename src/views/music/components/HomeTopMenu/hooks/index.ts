@@ -1,5 +1,7 @@
-import { activeKey, inputData, menuOptions, store } from './useMenus'
+import { activeKey, inputData, menuOptions } from './useMenus'
+import { info, options, handleSelect } from './useInfo'
 
-const useMenus = { activeKey, inputData, menuOptions, store }
+const useMenus = { activeKey, inputData, menuOptions }
+const userInfo = { info, options, handleSelect }
 
-export { useMenus }
+export { useMenus, userInfo }
