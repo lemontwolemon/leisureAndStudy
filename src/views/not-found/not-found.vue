@@ -27,8 +27,7 @@
       .search-window(
         ref="searchWindow"
         v-on:animationend="searchWindowAnimationEnd"
-        :style="{ top: (searchBox.y !== null) ? searchBox.y + 'px' : ''," +
-        " left: (searchBox.x !== null) ? searchBox.x + 'px' : '' }"
+        :style="{ top: (searchBox.y !== null) ? searchBox.y + 'px' : '',left: (searchBox.x !== null) ? searchBox.x + 'px' : '' }"
         v-if="searchBox.show === true"
       )
         //- .search-window-label Search
@@ -45,8 +44,8 @@
               span
         .search-window-section(@scroll="searchWindowScroll")
           transition-group(name="search-window-container-transition" tag="div")
+          template(v-for="{data, index} in searchData")
             .search-window-container(
-              v-for="{data, index} in searchData"
               v-if="data.Name.toLowerCase().indexOf(searchBox.keyword.toLowerCase()) >= 0 ||" +
               "data.Description.toLowerCase().indexOf(searchBox.keyword.toLowerCase()) >= 0"
               :key="index"

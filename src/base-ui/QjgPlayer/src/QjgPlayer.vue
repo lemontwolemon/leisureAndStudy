@@ -5,7 +5,6 @@
 </template>
 
 <script lang="ts" setup>
-// import http from '@/api/http'
 import APlayer from 'APlayer'
 import { player } from './player'
 import 'APlayer/dist/APlayer.min.css'
@@ -119,7 +118,7 @@ const show = ref<boolean>(false)
 emitter.on('info', (e: any) => {
   info.value = e
   show.value = true
-  if (info.value.type) {
+  if (info.value.type || info.value.creator) {
     player
       .getSongSheet(props.songServer, props.songType, info.value.id)
       .then((res: any) => {

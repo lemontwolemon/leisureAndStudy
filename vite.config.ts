@@ -53,12 +53,12 @@ export default defineConfig({
           axios: [
             // default imports
             ['default', 'axios'] // import { default as axios } from 'axios',
-          ],
-          '[package-name]': [
-            '[import-names]',
-            // alias
-            ['[from]', '[alias]']
           ]
+          // '[package-name]': [
+          //   '[import-names]',
+          //   // alias
+          //   ['[from]', '[alias]']
+          // ]
         }
       ],
       dts: 'src/auto-imports.d.ts',

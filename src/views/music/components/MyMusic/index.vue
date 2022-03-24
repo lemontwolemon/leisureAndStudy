@@ -87,6 +87,7 @@ const changeActive = (index: number, path: string) => {
 
 <style scoped lang="less">
 .my-music {
+  padding-bottom: 100px;
   .my-music-top {
     position: relative;
     width: 100%;

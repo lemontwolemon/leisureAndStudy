@@ -12,7 +12,7 @@
               <p>{{ item.content }}</p>
             </div>
           </div>
-          <a style="cursor: pointer" @click="enter(item.path)">进去看看</a>
+          <a style="cursor: pointer" @click="enter(item.path + '')">进去看看</a>
         </div>
       </template>
     </div>

@@ -7,16 +7,26 @@
     <div class="home-content">
       <router-view />
     </div>
+    <div class="qjg-player">
+      <qjg-player />
+    </div>
     <div class="home-footer"></div>
   </div>
 </template>
 
 <script setup lang="ts"></script>
 
-<style scoped>
+<style lang="less" scoped>
 .music {
+  position: relative;
   height: 100vh;
   overflow-x: hidden;
+  .qjg-player {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #ffffff;
+  }
 }
 .home-menu {
   background-color: #f6f6f6;

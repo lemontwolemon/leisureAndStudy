@@ -1,7 +1,7 @@
 <template>
   <div class="waterfall-photo">
     <ul>
-      <li v-for="(item, index) in data" :key="index">
+      <li v-for="(item, index) in props.data" :key="index">
         <img :src="getImage(item.number)" loading="lazy" />
       </li>
       <!--  在最后加一个空的<li>,这样最后一张图片就不会铺满  -->
@@ -10,25 +10,14 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({
-  name: 'waterfall-photo',
-  props: {
-    data: {
-      type: Array,
-      required: true
-    }
-  },
-  setup() {
-    const getImage = (image: string): string => {
-      return new URL(`../img/${image}.jpg`, import.meta.url).href
-    }
-    return {
-      getImage
-    }
-  }
+<script lang="ts" setup>
+const props: any = defineProps({
+  data: { type: Array, default: () => [], required: true }
 })
+
+const getImage = (image: any): any => {
+  return new URL(`../img/${image}.jpg`, import.meta.url).href
+}
 </script>
 
 <style scoped lang="scss">

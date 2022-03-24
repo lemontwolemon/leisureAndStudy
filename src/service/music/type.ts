@@ -17,4 +17,10 @@ interface ILikeList {
   uid: number
 }
 
-export { ILYRIC, ISongUrl, IPlaylistTrackAll, ILikeList }
+interface IUserPlaylist {
+  uid: number
+  limit?: number
+  offset?: number
+}
+
+export { ILYRIC, ISongUrl, IPlaylistTrackAll, ILikeList, IUserPlaylist }

@@ -1,5 +1,11 @@
 import quRequest from '../index'
-import { ILYRIC, ISongUrl, IPlaylistTrackAll, ILikeList } from './type'
+import {
+  ILYRIC,
+  ISongUrl,
+  IPlaylistTrackAll,
+  ILikeList,
+  IUserPlaylist
+} from './type'
 
 enum Search {
   RECOMMENDRESOURCE = '/recommend/resource',
@@ -11,7 +17,8 @@ enum Search {
   SONGURL = '/song/url',
   PLAYLISTTRACKALL = '/playlist/track/all',
   LIKELIST = '/likelist',
-  SONGDETAIL = '/song/detail'
+  SONGDETAIL = '/song/detail',
+  USERPLAYLIST = '/user/playlist'
 }
 //获取每日推荐歌单
 export function recommendResource() {
@@ -77,6 +84,13 @@ export function likeList(data: ILikeList) {
 export function songDetail(data: any) {
   return quRequest.get({
     url: Search.SONGDETAIL,
+    params: data
+  })
+}
+//获取用户歌单
+export function userPlaylist(data: IUserPlaylist) {
+  return quRequest.get({
+    url: Search.USERPLAYLIST,
     params: data
   })
 }

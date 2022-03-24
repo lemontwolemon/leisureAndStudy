@@ -19,9 +19,6 @@
     <div class="qjg-list">
       <qjg-list />
     </div>
-    <div class="qjg-player">
-      <qjg-player />
-    </div>
     <!--    <div class="new-album">-->
     <!--      <qjg-carousel v-bind="newAlbumData" />-->
     <!--    </div>-->
@@ -93,7 +90,6 @@ onMounted(() => {
   background-color: #f5f5f5;
 }
 .home {
-  position: relative;
   padding-bottom: 100px;
   .playlist-recommended {
     background-color: #fafafa;
@@ -103,12 +99,6 @@ onMounted(() => {
   }
   .qjg-list {
     background-color: #f5f5f5;
-  }
-  .qjg-player {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #ffffff;
   }
   .new-album {
     background-color: #f5f5f5;

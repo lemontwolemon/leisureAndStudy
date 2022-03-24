@@ -11,7 +11,9 @@
 
 <script setup lang="ts">
 import { likeList, songDetail } from '../../../../../../service/music'
-import { storage } from '../../../../../../utils/localStorage/localStorage'
+import { storage } from '@/utils/localStorage/localStorage'
+import { NGradientText, DataTableColumns } from 'naive-ui'
+import emitter from '@/components/eventBus'
 
 const info = storage.get('info')
 
@@ -21,40 +23,63 @@ const pagination = {
   pageSize: 10
 }
 
-const columns = [
-  {
-    title: '歌曲',
-    key: 'name',
-    width: '60%',
-    ellipsis: {
-      tooltip: true
+const createColumns = ({
+  play
+}: {
+  play: (row: any) => void
+}): DataTableColumns<any> => {
+  return [
+    {
+      title: '歌曲',
+      key: 'name',
+      width: '60%',
+      className: 'name',
+      ellipsis: {
+        tooltip: true
+      },
+      render(row: any) {
+        return h(
+          NGradientText,
+          {
+            type: 'success',
+            onClick: () => play(row)
+          },
+          { default: () => row.name }
+        )
+      }
+    },
+    {
+      title: '歌手',
+      key: 'artist',
+      width: '15%',
+      ellipsis: {
+        tooltip: true
+      }
+    },
+    {
+      title: '专辑',
+      key: 'album',
+      width: '15%',
+      ellipsis: {
+        tooltip: true
+      }
+    },
+    {
+      title: '时长',
+      key: 'dt',
+      width: '10%',
+      ellipsis: {
+        tooltip: true
+      }
     }
-  },
-  {
-    title: '歌手',
-    key: 'artist',
-    width: '15%',
-    ellipsis: {
-      tooltip: true
-    }
-  },
-  {
-    title: '专辑',
-    key: 'album',
-    width: '15%',
-    ellipsis: {
-      tooltip: true
-    }
-  },
-  {
-    title: '时长',
-    key: 'dt',
-    width: '10%',
-    ellipsis: {
-      tooltip: true
-    }
+  ]
+}
+
+const columns = createColumns({
+  play(row: any) {
+    emitter.emit('info', row)
   }
-]
+})
 
 const formatSeconds = (msTime: number) => {
   let time = msTime / 1000
@@ -105,6 +130,9 @@ onMounted(() => {
 .like-song {
   :deep(.n-data-table .n-data-table__pagination) {
     justify-content: center;
+  }
+  :deep(.name) {
+    cursor: pointer;
   }
 }
 </style>
